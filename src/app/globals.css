@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+/* Paleta y tipografías de Hungry Walker */
+@theme inline {
+  --color-hw-base: #181614;
+  --color-hw-red: #e31b23;
+  --color-hw-orange: #e98b30;
+  --color-hw-cream: #f6efe6;
+  --color-hw-tan: #a98c66;
+  --color-hw-muted: #9e948b;
+  --color-hw-card: #1a1613;
+  --color-hw-line: #3a2f27;
+
+  --font-display: var(--font-abril);
+  --font-sans: var(--font-dm-sans);
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  width: 100%;
+  overflow-x: clip;
+  scroll-behavior: smooth;
+}
+
+/* En escritorio, conserva una escala legible sin crecer demasiado en pantallas amplias. */
+@media (min-width: 1024px) {
+  html {
+    font-size: clamp(0.9375rem, 1.172vw, 1rem);
+  }
+}
+
+body {
+  width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+  background: #0d0c0b;
+  color: var(--color-hw-cream);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  scrollbar-color: var(--color-hw-line) #0d0c0b;
+  scrollbar-width: thin;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-hw-orange);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/*
+ * Fondo de mesa: luz cálida a la derecha (donde va el plato), zona de texto
+ * más oscura a la izquierda y viñeta en las esquinas.
+ */
+.bg-hero {
+  background:
+    radial-gradient(
+      ellipse 52% 68% at 70% 35%,
+      #4b3421 0%,
+      #33261a 40%,
+      rgb(51 38 26 / 0) 85%
+    ),
+    radial-gradient(
+      ellipse 105% 110% at 70% 40%,
+      rgb(13 12 11 / 0) 46%,
+      #0d0c0b 100%
+    ),
+    linear-gradient(90deg, #12100e 0%, #12100e 26%, rgb(18 16 14 / 0) 56%),
+    var(--color-hw-base);
+  background-attachment: fixed;
+}
+
+/* En móvil/tablet la luz va centrada arriba, detrás de la tabla. */
+@media (max-width: 1023px) {
+  .bg-hero {
+    background:
+      radial-gradient(
+        ellipse 95% 42% at 50% 24%,
+        #4b3421 0%,
+        #33261a 45%,
+        rgb(51 38 26 / 0) 90%
+      ),
+      radial-gradient(
+        ellipse 120% 100% at 50% 35%,
+        rgb(13 12 11 / 0) 50%,
+        #0d0c0b 100%
+      ),
+      var(--color-hw-base);
+    background-attachment: fixed;
+  }
+}
+
+/*
+ * Grano sutil: ruido gris con mezcla "overlay", así no cambia el brillo medio
+ * y se nota más en la zona iluminada. SVG en línea, sin peticiones de red.
+ */
+.bg-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  opacity: 0.28;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
