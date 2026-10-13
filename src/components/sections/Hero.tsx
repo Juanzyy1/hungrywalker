@@ -1,4 +1,8 @@
+"use client";
+
 import Image from "next/image";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useRef } from "react";
 import { Reveal } from "@/components/animations/Reveal";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { siteConfig } from "@/config/site";
@@ -7,16 +11,33 @@ import { TopProducts } from "./TopProducts";
 
 export function Hero() {
   const { tagline } = siteConfig;
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const introOpacity = useTransform(scrollYProgress, [0.2, 0.82], [1, 0]);
+  const introX = useTransform(scrollYProgress, [0.2, 0.82], [0, -28]);
+  const introY = useTransform(scrollYProgress, [0.2, 0.82], [0, -34]);
+  const productsOpacity = useTransform(scrollYProgress, [0.35, 0.82], [1, 0]);
+  const productsY = useTransform(scrollYProgress, [0.35, 0.82], [0, 28]);
+  const visualOpacity = useTransform(scrollYProgress, [0.3, 0.9], [1, 0]);
+  const visualX = useTransform(scrollYProgress, [0.3, 0.9], [0, 42]);
+  const visualScale = useTransform(scrollYProgress, [0.3, 0.9], [1, 0.96]);
 
   return (
     <section
+      ref={heroRef}
       id="inicio"
       aria-labelledby="hero-title"
       className="relative z-10 flex min-h-[calc(100svh-4.5rem)] flex-col"
     >
       <div className="mx-auto flex w-full flex-1 flex-col px-6 sm:px-10 lg:px-8">
         <div className="grid flex-1 items-center gap-8 py-10 sm:py-14 lg:min-h-0 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] lg:grid-rows-[1fr_auto] lg:gap-x-5 lg:gap-y-0 lg:py-2">
-          <div className="relative z-10 flex min-w-0 flex-col justify-center">
+          <motion.div
+            style={{ opacity: introOpacity, x: introX, y: introY }}
+            className="relative z-10 flex min-w-0 flex-col justify-center"
+          >
             <div className="lg:-translate-y-3">
               <Reveal className="pt-1.5">
                 <Image
@@ -54,11 +75,22 @@ export function Hero() {
               </Reveal>
             </div>
 
-          </div>
-          <HeroVisual />
-          <Reveal delay={0.35} className="mt-1 lg:-translate-y-14 lg:col-start-1 lg:row-start-2 lg:mt-0">
-            <TopProducts />
-          </Reveal>
+          </motion.div>
+          <HeroVisual
+            style={{
+              opacity: visualOpacity,
+              x: visualX,
+              scale: visualScale,
+            }}
+          />
+          <motion.div
+            style={{ opacity: productsOpacity, y: productsY }}
+            className="mt-1 lg:-translate-y-14 lg:col-start-1 lg:row-start-2 lg:mt-0"
+          >
+            <Reveal delay={0.35}>
+              <TopProducts />
+            </Reveal>
+          </motion.div>
         </div>
       </div>
     </section>

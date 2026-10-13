@@ -1,9 +1,15 @@
+"use client";
+
 import Image from "next/image";
+import { motion, type MotionStyle } from "motion/react";
 import { Reveal } from "@/components/animations/Reveal";
 
-export function HeroVisual() {
+export function HeroVisual({ style }: { style: MotionStyle }) {
   return (
-    <div className="relative z-0 mx-auto w-full min-w-0 max-w-[55rem] lg:-ml-[4%] lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:w-[108%] lg:max-w-none">
+    <motion.div
+      style={style}
+      className="relative z-0 mx-auto w-full min-w-0 max-w-[55rem] lg:-ml-[4%] lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:w-[108%] lg:max-w-none"
+    >
       <div className="relative">
         <Reveal x={36} y={0} delay={0.15}>
           <Image
@@ -35,6 +41,6 @@ export function HeroVisual() {
           <span className="ml-1 font-normal text-hw-orange">(PRECIO)</span>
         </p>
       </Reveal>
-    </div>
+    </motion.div>
   );
 }

@@ -10,7 +10,7 @@ export function MenuSection() {
       className="relative z-10 scroll-mt-20 bg-transparent px-6 py-10 sm:px-10 sm:py-12 lg:px-8 lg:py-14"
     >
       <div className="w-full">
-        <ScrollReveal>
+        <ScrollReveal x={-28} y={18}>
           <header className="max-w-2xl">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-hw-orange">
               Hungry Walker
@@ -27,7 +27,7 @@ export function MenuSection() {
           </header>
         </ScrollReveal>
 
-        <ScrollReveal delay={0.1}>
+        <ScrollReveal x={28} y={12} delay={0.12}>
           <nav
             aria-label="Categorías del menú"
             className="mt-6 flex gap-2 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
@@ -52,7 +52,7 @@ export function MenuSection() {
               aria-labelledby={`${category.id}-title`}
               className="scroll-mt-24"
             >
-              <ScrollReveal>
+              <ScrollReveal x={-32} y={12}>
                 <h3
                   id={`${category.id}-title`}
                   className="border-b border-white/10 pb-2 font-display text-2xl text-hw-cream sm:text-3xl"

@@ -13,14 +13,25 @@ export function MenuProductCard({
 }) {
   return (
     <motion.li
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{
+        opacity: 0,
+        x: index % 2 === 0 ? -36 : 36,
+        y: 24,
+        scale: 0.96,
+      }}
+      whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{
-        duration: 0.7,
-        delay: index * 0.1,
+        duration: 0.8,
+        delay: index * 0.14,
         ease: [0.22, 1, 0.36, 1],
       }}
+      whileHover={{
+        y: -6,
+        scale: 1.015,
+        transition: { duration: 0.25, ease: "easeOut" },
+      }}
+      whileTap={{ scale: 0.99 }}
       className="overflow-hidden rounded-2xl border border-hw-line bg-hw-card/80 transition-colors hover:border-hw-orange/70"
     >
       <Image
