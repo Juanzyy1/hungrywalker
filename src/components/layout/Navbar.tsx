@@ -1,10 +1,17 @@
+"use client";
+
 import Link from "next/link";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { siteConfig } from "@/config/site";
+import { useActiveSection } from "./useActiveSection";
+
+const navSectionIds = ["inicio", "menu"] as const;
 
 export function Navbar() {
+  const activeSection = useActiveSection(navSectionIds);
+
   return (
-    <header className="relative z-20 flex items-center justify-between pt-6 lg:pt-6 lg:pr-12">
+    <header className="sticky top-0 z-40 flex w-full items-center justify-between bg-[#0d0c0b]/85 px-6 py-4 shadow-lg shadow-black/10 backdrop-blur-md sm:px-10 lg:px-8 lg:py-4">
       <Link
         href="/"
         aria-label="Hungry Walker, inicio"
@@ -15,8 +22,8 @@ export function Navbar() {
 
       <nav aria-label="Principal" className="flex items-center gap-3 sm:gap-6 lg:gap-8">
         <ul className="hidden items-center gap-6 text-sm font-medium sm:flex lg:gap-8">
-          {siteConfig.navLinks.map((link, index) => {
-            const isCurrent = index === 0;
+          {siteConfig.navLinks.map((link) => {
+            const isCurrent = activeSection === link.href.slice(1);
             return (
               <li key={link.href}>
                 <a
@@ -61,16 +68,22 @@ export function Navbar() {
             </svg>
           </summary>
           <ul className="absolute top-full right-0 z-30 mt-2 flex min-w-40 flex-col gap-1 rounded-xl border border-hw-line bg-hw-card p-2 shadow-xl shadow-black/40">
-            {siteConfig.navLinks.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className="block rounded-lg px-4 py-2.5 text-sm font-medium text-hw-cream transition-colors hover:bg-white/5"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
+            {siteConfig.navLinks.map((link) => {
+              const isCurrent = activeSection === link.href.slice(1);
+              return (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    aria-current={isCurrent ? "page" : undefined}
+                    className={`block rounded-lg px-4 py-2.5 text-sm font-medium transition-colors hover:bg-white/5 ${
+                      isCurrent ? "text-hw-cream" : "text-hw-muted"
+                    }`}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </details>
       </nav>

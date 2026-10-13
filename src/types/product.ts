@@ -6,3 +6,13 @@ export interface FeaturedProduct {
   thumbnail: string;
   isBestSeller?: boolean;
 }
+
+export interface MenuProduct extends FeaturedProduct {
+  description: string;
+}
+
+export interface MenuCategory {
+  id: string;
+  name: string;
+  products: MenuProduct[];
+}

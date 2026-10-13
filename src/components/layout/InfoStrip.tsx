@@ -32,11 +32,6 @@ export function InfoStrip() {
         />
       </div>
 
-      <div aria-hidden="true" className="mt-5 flex justify-center gap-2.5 lg:mt-6">
-        <span className="size-3 rounded-full bg-hw-muted" />
-        <span className="size-3 rounded-full bg-white/20" />
-        <span className="size-3 rounded-full bg-white/20" />
-      </div>
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { featuredProducts } from "@/config/featured-products";
 export function TopProducts() {
   return (
     <section
-      id="menu"
+      id="lo-mas-pedido"
       aria-labelledby="top-products-title"
       className="lg:max-w-[48rem]"
     >
