@@ -11,7 +11,7 @@ export const siteConfig = {
     { label: "Inicio", href: "#inicio" },
     { label: "Menú", href: "#menu" },
   ],
-  // Enlace directo a WhatsApp. La integración real con la API llegará después.
+  // Enlace directo al chat de WhatsApp configurado para el negocio.
   whatsappUrl: whatsappNumber
     ? `https://wa.me/${whatsappNumber}`
     : "https://wa.me/",
